@@ -1,5 +1,9 @@
 package com.mmall.common;
 
+/**
+ * @author pxChen
+ * @date 2020/1/5
+ */
 public enum ResponseCode {
     SUCCESS(0,"SUCCESS"),
     ERROR(1,"ERROR"),

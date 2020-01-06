@@ -8,6 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author pxChen
+ * @date 2020/1/5
+ */
 public class TokenCache {
 
     private static Logger logger = LoggerFactory.getLogger(TokenCache.class);

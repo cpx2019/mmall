@@ -2,6 +2,10 @@ package com.mmall.util;
 
 import java.security.MessageDigest;
 
+/**
+ * @author pxChen
+ * @date 2020/1/5
+ */
 public class MD5Util {
 
     private static String byteArrayToHexString(byte b[]) {

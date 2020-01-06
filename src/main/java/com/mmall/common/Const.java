@@ -1,5 +1,9 @@
 package com.mmall.common;
 
+/**
+ * @author pxChen
+ * @date 2020/1/5
+ */
 public class Const {
 
     public static final String CURRENT_USER = "currentUser";
