@@ -109,14 +109,17 @@ public class IUserServiceImpl implements IUserService {
 
     @Override
     public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
-        if(StringUtils.isNotBlank(forgetToken)) {
+        if(StringUtils.isBlank(forgetToken)) {
             return ServerResponse.createByErrorMessage("参数错误,token需要传递");
         }
         ServerResponse<String> vaildResponse = checkVaild(username, Const.USERNAME);
         if(vaildResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
-        String token = TokenCache.getValue(username);
+        String token = TokenCache.getValue(TokenCache.TOKEN_PREFIX+username);
+        if(StringUtils.isBlank(token)) {
+            ServerResponse.createByErrorMessage("token无效或者过期");
+        }
         if(StringUtils.equals(token, forgetToken)) {
             String md5Password = MD5Util.MD5EncodeUtf8(passwordNew);
             int rowCount = userMapper.updatePassword(username, md5Password);
@@ -124,7 +127,7 @@ public class IUserServiceImpl implements IUserService {
                 return ServerResponse.createBySuccess("修改密码成功");
             }
         } else {
-            return ServerResponse.createByErrorMessage("token无效或者过期");
+            return ServerResponse.createByErrorMessage("token错误,请重新获取重置密码的token");
         }
         return ServerResponse.createByErrorMessage("修改密码失败");
     }
